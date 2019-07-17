@@ -15,11 +15,14 @@ import permissions.dispatcher.RuntimePermissions
 import java.io.File
 import java.io.RandomAccessFile
 import java.lang.Exception
+import kotlin.coroutines.CoroutineContext
 
 @RuntimePermissions
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope {
 
-    private var job: Job? = null
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         fillStorageButton.setOnClickListener { onFillStorageClickWithPermissionCheck() }
         resetButton.setOnClickListener { onResetClickWithPermissionCheck() }
+
+        job = Job()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -36,12 +41,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        GlobalScope.launch { updateFreeSpace() }
+        launch { updateFreeSpace() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun onFillStorageClick() {
-        job = GlobalScope.launch(Dispatchers.Main) {
+        job = launch {
             fillStorageButton.isEnabled = false
             try {
                 val remaining = fillStorage()
@@ -60,11 +70,12 @@ class MainActivity : AppCompatActivity() {
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun onResetClick() {
-        if (job?.isActive == true) {
-            job?.cancel()
+        if (job.isActive) {
+            job.cancel()
             return
         }
-        GlobalScope.launch(Dispatchers.Main) {
+
+        launch {
             resetButton.isEnabled = false
             reset()
             updateFreeSpace()
