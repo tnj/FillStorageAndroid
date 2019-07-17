@@ -24,6 +24,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "distribution"
+    productFlavors {
+        local {
+            dimension "distribution"
+        }
+        "public" {
+            dimension "distribution"
+        }
+    }
+}
+
+deploygate {
+    deployments {
+        def hash = "git rev-parse --short HEAD".execute([], project.rootDir).in.text.trim()
+        localDebug {
+            message = "local debug of git:${hash}"
+        }
+        publicDebug {
+            message = "public debug of git:${hash}"
+
+            distribution {
+                key = "02746a717f4176ffdbd65f37083aa4d13cce7239"
+                releaseNote = "https://github.com/tnj/FillStorageAndroid/commit/${hash}"
+            }
+        }
+    }
 }
 
 dependencies {
