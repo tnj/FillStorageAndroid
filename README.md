@@ -1,4 +1,4 @@
-FillStorageAndroid
+FillStorageAndroid [![Build Status](https://app.bitrise.io/app/88324a90332772b3/status.svg?token=O70EvE63DD39NR-rN87wbw)](https://app.bitrise.io/app/88324a90332772b3)
 ====
 
 Fills up Android device's external storage with dummy data to emulate an insufficient storage situation for testing purpose.
