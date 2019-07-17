@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fill Storage</string>
+    <string name="reset">Reset</string>
+    <string name="fill_storage">Fill Storage</string>
+    <string name="free">Free</string>
+    <string name="zero_byte">0B</string>
+</resources>
