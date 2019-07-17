@@ -1,4 +1,6 @@
-FillStorageAndroid [![Build Status](https://app.bitrise.io/app/88324a90332772b3/status.svg?token=O70EvE63DD39NR-rN87wbw)](https://app.bitrise.io/app/88324a90332772b3)
+FillStorageAndroid
+[![Build Status](https://app.bitrise.io/app/88324a90332772b3/status.svg?token=O70EvE63DD39NR-rN87wbw)](https://app.bitrise.io/app/88324a90332772b3) 
+[![Download to device](https://dply.me/2mofmm/button/small)](https://dply.me/2mofmm#install)
 ====
 
 Fills up Android device's external storage with dummy data to emulate an insufficient storage situation for testing purpose.
@@ -8,5 +10,5 @@ Fills up Android device's external storage with dummy data to emulate an insuffi
 
 ## Install
 
-[<img src="https://dply.me/fw6zf2/button/large" alt="Try it on your device via DeployGate">](https://dply.me/fw6zf2#install)
+[![Download to device](https://dply.me/fw6zf2/button/large)](https://dply.me/fw6zf2#install)
 
